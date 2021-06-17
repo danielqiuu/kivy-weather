@@ -1,0 +1,243 @@
+#:kivy 2.0.0
+
+
+WindowManager:
+    MainWindow:
+    DetailedWeatherWindow:
+    HourlyWeatherWindow:
+    
+
+
+<MainWindow>:
+    name: "mainW"
+    city: city
+    GridLayout:
+        rows: 7
+        GridLayout:
+            cols: 3
+            Label: 
+                id: cityName
+                text: "City: " + root.cityName
+            Label:
+                id: lat
+                text: "Lat: " + str(root.lat) 
+            Label:
+                id: lon
+                text: "Lon: " + str(root.lon)
+        GridLayout:
+            cols: 3
+            Label:
+                text: "Enter your location (city)"
+            TextInput:
+                id: city
+                multiline: False
+            Button:
+                text: "Search this location"
+                on_release: root.searchLocation()
+
+        Button:
+            text: "Determine my location (inaccurate)"
+            on_release: root.findMe()
+        
+        Label:
+            text: "Current temperature: " + str(root.currentTemp) + chr(176) + "C"
+        
+        Label:
+            text: "Feels like temperature: " +  str(root.feelsLikeTemp) + chr(176) + "C"
+        
+        Label:
+            text: "Precipitation probability: " + str(root.precProb) + "%"
+        
+        GridLayout:
+            cols: 2
+            Button:
+                text: "More Details"
+                on_release: 
+                    root.manager.transition.direction = "right"
+                    app.root.current = "detailed"
+            Button:
+                text: "Hourly Weather"
+                on_release: 
+                    root.manager.transition.direction = "left"
+                    app.root.current = "hourly"
+    
+
+
+
+<DetailedWeatherWindow>:
+    on_pre_enter: root.updateVar()
+    name: "detailed"
+    GridLayout:
+        rows: 6
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Go back"
+                on_release: 
+                    root.manager.transition.direction = "left"
+                    app.root.current = "mainW"
+
+            Label:
+                id: cityName
+                text: "City: " + str(root.cityName)
+
+        GridLayout:
+            cols: 4
+            Label:
+                text: "Minimum temperature"
+            Label:
+                text: "Maximum temperature"
+            Label:
+                text: "Current temperature"
+            Label:
+                text: "Feels like temperature"
+        GridLayout:
+            cols: 4
+            Label:
+                id: minTemp
+                text: str(root.minTemp) + chr(176) + "C"
+            Label:
+                id: maxTemp
+                text: str(root.maxTemp) + chr(176) + "C"
+            Label:
+                id: curTemp
+                text: str(root.curTemp) + chr(176) + "C"
+            Label:
+                id: feelsLike
+                text: str(root.feelsLike) + chr(176) + "C"
+        GridLayout:
+            cols: 2
+            Label:
+                id: pressure
+                text: "Pressure: " + str(root.pressure) + " hPa"
+            Label:
+                id: humidity
+                text: "Humidity: " + str(root.humidity) + "%"
+        GridLayout:
+            cols: 2
+            Label:
+                id:sunrise
+                text: "Sunrise: " + str(root.sunrise) + " EST"
+            Label: 
+                id: sunset
+                text: "Sunset: " + str(root.sunset) + " EST"
+
+
+
+
+<HourlyWeatherWindow>:
+    name: "hourly"
+    on_pre_enter: root.updateVar()
+    GridLayout:
+        rows: 5
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Go back"
+                on_release: 
+                    root.manager.transition.direction = "right"
+                    app.root.current = "mainW"
+            Label:
+                id: cityName
+                text: "City: " + root.cityName
+        GridLayout:
+            cols: 8
+            Label: 
+                text: "Current\ntime"
+            Label:
+                id: currentTime
+                text: str(root.currentTime) + ":00 EST"
+            Label:
+                id: currentTime1
+                text: str(root.currentTime1) + ":00 EST"
+            Label:
+                id: currentTime2
+                text: str(root.currentTime2) + ":00 EST"
+            Label:
+                id: currentTime3
+                text: str(root.currentTime3) + ":00 EST"
+            Label:
+                id: currentTime4
+                text: str(root.currentTime4) + ":00 EST"
+            Label:
+                id: currentTime5
+                text: str(root.currentTime5) + ":00 EST"
+            Label:
+                id: currentTime6
+                text: str(root.currentTime6) + ":00 EST"
+        GridLayout:
+            cols: 8
+            Label:
+                text: "Current\ntemperature"
+            Label:
+                id: currentTemp
+                text: str(root.currentTemp) + chr(176) + "C"
+            Label:
+                id: currentTemp1
+                text: str(root.currentTemp1) + chr(176) + "C"
+            Label:
+                id: currentTemp2
+                text: str(root.currentTemp2) + chr(176) + "C"
+            Label:
+                id: currentTemp3
+                text: str(root.currentTemp3) + chr(176) + "C"
+            Label:
+                id: currentTemp4
+                text: str(root.currentTemp4) + chr(176) + "C"
+            Label:
+                id: currentTemp5
+                text: str(root.currentTemp5) + chr(176) + "C"
+            Label:
+                id: currentTemp6
+                text: str(root.currentTemp6) + chr(176) + "C"
+        GridLayout:
+            cols: 8
+            Label:
+                text: "Feels like\ntemperature"
+            Label:
+                id: feelsLike
+                text: str(root.feelsLike) + chr(176) + "C"
+            Label:
+                id: feelsLike1
+                text: str(root.feelsLike1) + chr(176) + "C"
+            Label:
+                id: feelsLike2
+                text: str(root.feelsLike2) + chr(176) + "C"
+            Label:
+                id: feelsLike3
+                text: str(root.feelsLike3) + chr(176) + "C"
+            Label:
+                id: feelsLike4
+                text: str(root.feelsLike4) + chr(176) + "C"
+            Label:
+                id: feelsLike5
+                text: str(root.feelsLike5) + chr(176) + "C"
+            Label:
+                id: feelsLike6
+                text: str(root.feelsLike6) + chr(176) + "C"
+        GridLayout:
+            cols: 8
+            Label:
+                text: "Precipitation\nprobability"
+            Label: 
+                id: pop
+                text: str(root.pop) + "%"
+            Label: 
+                id: pop1
+                text: str(root.pop1) + "%"
+            Label: 
+                id: pop2
+                text: str(root.pop2) + "%"
+            Label: 
+                id: pop3
+                text: str(root.pop3) + "%"
+            Label: 
+                id: pop4
+                text: str(root.pop4) + "%"
+            Label: 
+                id: pop5
+                text: str(root.pop5) + "%"
+            Label: 
+                id: pop6
+                text: str(root.pop6) + "%"
+
